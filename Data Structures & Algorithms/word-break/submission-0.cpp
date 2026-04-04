@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n=s.size(); 
+        unordered_set<string> st(wordDict.begin(), wordDict.end());
+        vector<bool> dp(n,false);
+        dp[0]=true;
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<i;j++){
+                string str = s.substr(j,i-j);
+                if(st.count(str) && dp[j])
+                {
+                    dp[i]=true;
+                    break;
+                }
+            }
+        }return dp[n];
+    }
+};
